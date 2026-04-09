@@ -1,0 +1,61 @@
+### Task Tracker API - REST Client
+
+@baseUrl = http://localhost:5000
+@contentType = application/json
+
+### 1. GET all tasks
+GET {{baseUrl}}/tasks
+
+
+### 2. CREATE a new task
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, eggs, bread",
+  "priority": "medium"
+}
+
+
+### 3. CREATE another task (for testing)
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+  "title": "Finish project",
+  "description": "Complete the task tracker UI",
+  "priority": "high"
+}
+
+
+### 4. GET a specific task (change id to test)
+GET {{baseUrl}}/tasks/1
+
+
+### 5. UPDATE a task (change id and fields as needed)
+PUT {{baseUrl}}/tasks/1
+Content-Type: {{contentType}}
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, eggs, bread, cheese",
+  "priority": "high",
+  "completed": false
+}
+
+
+### 6. MARK task as completed
+PUT {{baseUrl}}/tasks/1
+Content-Type: {{contentType}}
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, eggs, bread, cheese",
+  "priority": "high",
+  "completed": true
+}
+
+
+### 7. DELETE a task (change id as needed)
+DELETE {{baseUrl}}/tasks/1
