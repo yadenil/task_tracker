@@ -5,8 +5,8 @@ const tasksRouter = require("./routes/tasks");
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", 
-  "https://task-tracker-gamma-topaz.vercel.app/", 
+  "http://localhost:5173",
+  process.env.FRONTEND_URL || "https://task-tracker-gamma-topaz.vercel.app",
 ];
 
 app.use(

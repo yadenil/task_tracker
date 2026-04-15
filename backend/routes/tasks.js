@@ -74,6 +74,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+// PATCH /tasks/:id (toggle completed status)
+router.patch("/:id", async (req, res) => {
+  try {
+    console.log(`[PATCH /tasks/:id] Toggling task ${req.params.id}:`, req.body);
+    const { completed } = req.body;
+    await pool.query(
+      "UPDATE tasks SET completed=? WHERE id=?",
+      [completed ? 1 : 0, req.params.id],
+    );
+    const [rows] = await pool.query("SELECT * FROM tasks WHERE id=?", [
+      req.params.id,
+    ]);
+    console.log(`[PATCH /tasks/:id] Success - Toggled task ${req.params.id}`);
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(`[PATCH /tasks/:id] Error:`, err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 // PUT /tasks/:id
 router.put("/:id", async (req, res) => {
   try {

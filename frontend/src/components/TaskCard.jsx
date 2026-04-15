@@ -24,20 +24,20 @@ export default function TaskCard({ task, onToggle, onDelete }) {
           <div className="flex items-center gap-3 mb-2">
             <button
               onClick={() => onToggle(task.id)}
-              className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300 ${task.completed ? 'bg-emerald-500 border-emerald-500' : 'border-white/30 hover:border-violet-400'}`}
+              className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300 ${task.completed === 1 || task.completed === true ? 'bg-emerald-500 border-emerald-500' : 'border-white/30 hover:border-violet-400'}`}
             >
-              {task.completed && (
+              {(task.completed === 1 || task.completed === true) && (
                 <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
               )}
             </button>
-            <h3 className={`text-lg font-semibold transition-all duration-300 ${task.completed ? 'line-through text-white/40' : 'text-white'}`}>
+            <h3 className={`text-lg font-semibold transition-all duration-300 ${task.completed === 1 || task.completed === true ? 'line-through text-white/40' : 'text-white'}`}>
               {task.title}
             </h3>
           </div>
           
-          <p className={`text-sm mb-3 ${task.completed ? 'text-white/30' : 'text-white/60'}`}>
+          <p className={`text-sm mb-3 ${task.completed === 1 || task.completed === true ? 'text-white/30' : 'text-white/60'}`}>
             {task.description}
           </p>
           
@@ -49,7 +49,7 @@ export default function TaskCard({ task, onToggle, onDelete }) {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              {new Date(task.createdAt).toLocaleDateString()}
+              {task.createdAt ? new Date(task.createdAt).toLocaleDateString() : 'No date'}
             </span>
           </div>
         </div>

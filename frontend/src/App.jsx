@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await API.get("/tasks"); 
+        const res = await API.get("/tasks");
         setTasks(res.data);
       } catch (err) {
         console.error(err);
@@ -23,10 +23,14 @@ function App() {
     fetchTasks();
   }, []);
 
-  const addTask = async (task) => {
-    await axios.post("https://tasktracker-4pc3.onrender.com/", taskData, {
-      headers: { "Content-Type": "application/json" },
-    });
+  const addTask = async (taskData) => {
+    try {
+      const res = await API.post("/tasks", taskData);
+      setTasks((prev) => [...prev, res.data]);
+    } catch (err) {
+      console.error(err);
+      setMessage("Failed to add task ❌");
+    }
   };
 
   // ✅ Toggle task (PATCH)
@@ -50,7 +54,6 @@ function App() {
     try {
       await API.delete(`/tasks/${id}`);
       setTasks((prev) => prev.filter((task) => task.id !== id));
-      setMessage("Task deleted 🗑️");
     } catch (err) {
       console.error(err);
       setMessage("Failed to delete task ❌");
