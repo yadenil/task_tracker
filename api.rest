@@ -1,6 +1,6 @@
 ### Task Tracker API - REST Client
 
-@baseUrl = http://localhost:5000
+@baseUrl = https://tasktracker-4pc3.onrender.com
 @contentType = application/json
 
 ### 1. GET all tasks
